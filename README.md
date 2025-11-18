@@ -18,9 +18,7 @@ The game is a "best-of-three" match played on a 3x3 `BigBoard`. The twist is tha
 3.  **Winning a Round:** To win the `BigBoard` (and the round), a player must claim three `SmallBoard`s in a row (horizontally, vertically, or diagonally).
 4.  **Multi-Round Match:** The game is played over three rounds. The first player to win two rounds is the overall winner.
 
-> **[Image: Screenshot of the Ultimate Tic-Tac-Toe console board]**
->
-> *(**Developer Note:** Place a screenshot of your main game board printout here, similar to Figure Asgn3.2 in the PDF.)*
+
 
 ---
 
@@ -35,13 +33,14 @@ The most unique aspect of this project is the use of **operator overloading** to
 ### `operator+` & `operator-` (Round 3 Logic)
 * **Purpose:** To determine the winner of the third and final round in a special, non-standard way.
 * **Mechanic:** The `+` and `-` operators are overloaded on the `BigBoard` class. The game logic uses these to combine the outcomes of Round 1 and Round 2.
-    * If Player 1 wins both Round 1 & 2, the game ends (Best-of-three).
-    * If the players split the first two rounds, the "winner" of Round 3 is decided *randomly* based on a predefined combination logic (e.g., P1 wins R1 + P2 wins R2 = Random chance for P1 or P2 in R3).
-    * If this random third round *also* results in a draw, another random tie-breaker is used to determine the final match winner.
+    * If Player 1 wins both Round 1 & 2, the game ends (Best-of-three).
+    * If the players split the first two rounds, the "winner" of Round 3 is decided *randomly* based on a predefined combination logic (e.g., P1 wins R1 + P2 wins R2 = Random chance for P1 or P2 in R3).
+    * If this random third round *also* results in a draw, another random tie-breaker is used to determine the final match winner.
 
 ---
 
 ## 🏛️ Code Architecture (OOP)
+
 
 The system is built on a clean, reusable, and extensible object-oriented design:
 
