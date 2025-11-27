@@ -33,9 +33,9 @@ The most unique aspect of this project is the use of **operator overloading** to
 ### `operator+` & `operator-` (Round 3 Logic)
 * **Purpose:** To determine the winner of the third and final round in a special, non-standard way.
 * **Mechanic:** The `+` and `-` operators are overloaded on the `BigBoard` class. The game logic uses these to combine the outcomes of Round 1 and Round 2.
-    * If Player 1 wins both Round 1 & 2, the game ends (Best-of-three).
-    * If the players split the first two rounds, the "winner" of Round 3 is decided *randomly* based on a predefined combination logic (e.g., P1 wins R1 + P2 wins R2 = Random chance for P1 or P2 in R3).
-    * If this random third round *also* results in a draw, another random tie-breaker is used to determine the final match winner.
+    * If Player 1 wins both Round 1 & 2, the game ends (Best-of-three).
+    * If the players split the first two rounds, the "winner" of Round 3 is decided *randomly* based on a predefined combination logic (e.g., P1 wins R1 + P2 wins R2 = Random chance for P1 or P2 in R3).
+    * If this random third round *also* results in a draw, another random tie-breaker is used to determine the final match winner.
 
 ---
 
@@ -63,7 +63,6 @@ Navigate to the root directory and compile all `.cpp` source files:
 ```bash
 g++ *.cpp -o ultimate_tictactoe
 ```
-*(Note: If you have a `makefile`, you can simply run `make`.)*
 
 ### Run
 Execute the compiled program from your terminal:
