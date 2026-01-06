@@ -1,5 +1,7 @@
 # Ultimate Tic-Tac-Toe (C++)
 
+![Ultimate Tic-Tac-Toe Logo](logo.svg)
+
 Developed a unique C++ console version of "Ultimate Tic-Tac-Toe," enhancing the standard game with nested boards, custom rule logic via operator overloading, and a multi-round structure involving randomness.
 
 This project goes beyond a simple game port, using advanced C++ features as core components of the game's mechanics.
@@ -36,7 +38,22 @@ The most unique aspect of this project is the use of **operator overloading** to
     * If Player 1 wins both Round 1 & 2, the game ends (Best-of-three).
     * If the players split the first two rounds, the "winner" of Round 3 is decided *randomly* based on a predefined combination logic (e.g., P1 wins R1 + P2 wins R2 = Random chance for P1 or P2 in R3).
     * If this random third round *also* results in a draw, another random tie-breaker is used to determine the final match winner.
-
+```
+graph TD
+    Start([Start Game]) --> R1[Round 1]
+    R1 --> R2[Round 2]
+    R2 --> Check{Winner Decided?}
+    Check -- Yes --> End([End Game])
+    Check -- No (Split 1-1) --> R3[Round 3 Logic]
+    
+    R3 --> Rand{Random Choice}
+    Rand -- "Add (+)" --> OpAdd[Merge R1 & R2 Boards]
+    Rand -- "Subtract (-)" --> OpSub[Diff R1 & R2 Boards]
+    
+    OpAdd --> Determine[Determine R3 Winner]
+    OpSub --> Determine
+    Determine --> End
+```
 ---
 
 ## 🏛️ Code Architecture (OOP)
@@ -49,7 +66,43 @@ The system is built on a clean, reusable, and extensible object-oriented design:
 * **`SmallBoard` & `BigBoard`:** Concrete classes that inherit from `Playable` and/or `Board<T>`. They contain the specific logic for 3x3 and nested 9x9 play, respectively, and hold their own `BoardStatus`.
 * **`Game`:** A high-level controller class that manages the three-round game flow, player turns, and final win/loss/draw state.
 * **`Exception`:** A custom exception class for robust error handling, such as catching invalid moves on occupied cells.
-
+```
+classDiagram
+    class Playable {
+        <<Interface>>
+        #Player* player1
+        #Player* player2
+        +getWonBy()
+        +print()
+    }
+    class Board~T~ {
+        <<Abstract>>
+        #T* board[3][3]
+        +play()
+        +calculatePrint()
+    }
+    class SmallBoard {
+        +operator!()
+        +operator+(SmallBoard)
+        +operator-(SmallBoard)
+    }
+    class BigBoard {
+        +operator+(BigBoard)
+        +operator-(BigBoard)
+    }
+    class Game {
+        -BigBoard* round[3]
+        +start()
+        +checkGameWin()
+    }
+    
+    Playable <|-- Board
+    Playable <|-- Game
+    Board <|-- SmallBoard
+    Board <|-- BigBoard
+    BigBoard *-- SmallBoard : Contains 9
+    Game *-- BigBoard : Manages 3
+```
 ---
 
 ## 🚀 How to Compile & Run
