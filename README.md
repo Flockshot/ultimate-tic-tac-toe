@@ -1,6 +1,6 @@
 # Ultimate Tic-Tac-Toe (C++)
 
-![Ultimate Tic-Tac-Toe Logo](logo.svg)
+![Ultimate Tic-Tac-Toe Logo](.media/logo.svg)
 
 Developed a unique C++ console version of "Ultimate Tic-Tac-Toe," enhancing the standard game with nested boards, custom rule logic via operator overloading, and a multi-round structure involving randomness.
 
@@ -20,7 +20,21 @@ The game is a "best-of-three" match played on a 3x3 `BigBoard`. The twist is tha
 3.  **Winning a Round:** To win the `BigBoard` (and the round), a player must claim three `SmallBoard`s in a row (horizontally, vertically, or diagonally).
 4.  **Multi-Round Match:** The game is played over three rounds. The first player to win two rounds is the overall winner.
 
+### Visual Representation
+The console interface displays the nested grid structure as follows:
 
+```text
+Round: 1
+Board 1: Ongoing
+     X |   | O          |   |            |   |   
+    ---+---+---      ---+---+---      ---+---+---
+       | X |            | X |            |   |   
+    ---+---+---      ---+---+---      ---+---+---
+     O |   |          O |   | O          |   |   
+     
+       ...              ...              ...
+     (Representation of the 3x3 Nested Grid)
+```
 
 ---
 
@@ -38,7 +52,8 @@ The most unique aspect of this project is the use of **operator overloading** to
     * If Player 1 wins both Round 1 & 2, the game ends (Best-of-three).
     * If the players split the first two rounds, the "winner" of Round 3 is decided *randomly* based on a predefined combination logic (e.g., P1 wins R1 + P2 wins R2 = Random chance for P1 or P2 in R3).
     * If this random third round *also* results in a draw, another random tie-breaker is used to determine the final match winner.
-```
+
+```mermaid
 graph TD
     Start([Start Game]) --> R1[Round 1]
     R1 --> R2[Round 2]
@@ -54,10 +69,10 @@ graph TD
     OpSub --> Determine
     Determine --> End
 ```
+
 ---
 
 ## 🏛️ Code Architecture (OOP)
-
 
 The system is built on a clean, reusable, and extensible object-oriented design:
 
@@ -66,7 +81,8 @@ The system is built on a clean, reusable, and extensible object-oriented design:
 * **`SmallBoard` & `BigBoard`:** Concrete classes that inherit from `Playable` and/or `Board<T>`. They contain the specific logic for 3x3 and nested 9x9 play, respectively, and hold their own `BoardStatus`.
 * **`Game`:** A high-level controller class that manages the three-round game flow, player turns, and final win/loss/draw state.
 * **`Exception`:** A custom exception class for robust error handling, such as catching invalid moves on occupied cells.
-```
+
+```mermaid
 classDiagram
     class Playable {
         <<Interface>>
@@ -103,6 +119,7 @@ classDiagram
     BigBoard *-- SmallBoard : Contains 9
     Game *-- BigBoard : Manages 3
 ```
+
 ---
 
 ## 🚀 How to Compile & Run
